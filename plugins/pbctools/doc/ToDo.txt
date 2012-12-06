@@ -1,0 +1,9 @@
+Time-stamp: <2007-07-30 16:41 olenz>
+
+TODO-List for the pbctools
+--------------------------
+- add GUI
+- optimize pbcwrap in the same way as pbcunwrap
+- add compound-based variants of pbcunwrap?
+- add images to documentation
+

@@ -1,0 +1,25 @@
+Time-stamp: <2007-02-10 17:20 olenz>
+
+Done:   
+- merged set_unitcell, set_unitcell_vmd into pbcset
+- merged get_unitcell, get_unitcell_vmd into pbcget
+- renamed set_unitcell_xst to pbcset_xst
+- renamed unitcell_vmd2namd to pbc_vmd2namd
+- extracted pbc_namd2vmd from set_unitcell
+- renamed write_xsc to pbcwrite_xsc
+
+Removed procs, because they don't fit into PBCTools:
+- read_xst
+- flip_unitcell_angles
+- draw_pbc_cell
+- draw_pbc_vectors
+- draw_pbc_hexagon
+- draw_pbc_hexagon_debug
+- draw_pbc_boundary
+- waterboxsize
+- cut_pbc_cell
+- draw_minmax_box
+
+To be done:
+- test pbcset: with NAMD vectors
+- test pbcset_xst

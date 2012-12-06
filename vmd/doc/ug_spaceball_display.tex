@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RCS INFORMATION:
+%
+%       $RCSfile: ug_spaceball_display.tex,v $
+%       $Author: johns $        $Locker:  $                $State: Exp $
+%       $Revision: 1.6 $      $Date: 2004/07/12 19:06:23 $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DESCRIPTION:
+%  The controls available from the OpenGL Display window
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Using the Spaceball in the Graphics Window}
+\label{ug:spaceball}
+\index{spaceball!using}
+
+\VMD\ provides optional support for Spaceball six-degree-of-freedom input
+devices.  The Spaceball may be used to rotate, translate, and scale molecules,
+using up to 6 control axes simultaneously (3 axes in translation, 
+3 in rotation).  The Spaceball can be used independently and
+simultaneously with the mouse.  With the spaceball in one hand and the 
+mouse in the other, a user can perform complex picking and identification
+operations more efficiently, since the mouse can be left in pick mode
+(for example) while the Spaceball is used to perform rotations, 
+translations, and scaling operations with the other hand. 
+
+\index{spaceball!modes}
+The Spaceball can be run in one of several modes within \VMD. 
+The Spaceball interface currently provides two methods of rotation 
+and translation, and a scaling mode.  The Spaceball interface
+currently uses {\em Button 1} (known as {\em Function 1} in the SpaceWare
+driver) to reset the view, and {\em Button 2} to cycle through the
+available Spaceball interface modes.
+
+\subsection{Spaceball Driver}
+\index{spaceball!driver}
+\VMD\ interfaces to the Spaceball in one of two 
+ways; either by communicating directly with the Spaceball using 
+built-in serial interface software, or vendor provided drivers.
+\index{spaceball!driver!Unix}
+\index{spaceball!driver!MacOS X}
+\index{environment variables!VMDSPACEBALLPORT}
+Unix and Mac OS X versions of \VMD\ use the built-in serial Spaceball driver.
+At startup, \VMD\ checks for the existence of an environment
+variable {\em VMDSPACEBALLPORT}.  This environment variable must be
+set to the Unix device name of the serial port to which the Spaceball
+is attached.  The serial port device permissions must be set to allow
+the \VMD\ user to open the device for reading and writing.  In typical
+usage, this usually requires performing a {\tt chmod 666 /dev/somettyname} 
+on the appropriate device as root.
+One restriction with the use of the built-in Spaceball driver is that
+only one \VMD\ process may safely use the Spaceball at a time.  If multiple
+\VMD\ sessions are started on the same machine and all are set to open
+the Spaceball, it will behave very erratically.
+
+\index{spaceball!driver!Windows}
+The Windows version of \VMD\ uses the vendor-provided SpaceWare driver 
+exclusively, and operates somewhat differently from the serial interface 
+software used on Unix.  The SpaceWare software runs as a separate process
+from \VMD\ and must be started and fully operational before \VMD\ is run.
+At startup time \VMD\ attempts to open the SpaceWare interface, displaying
+the success or failure of initialization as it occurs, with applicable 
+diagnostic information.  The SpaceWare driver provides detailed control
+over the sensitivity and configuration of the Spaceball.  In order to use
+the Spaceball function keys with \VMD\, the SpaceWare driver must be set
+to send button events as {\em Function 1} and {\em Function 2} at a minimum.
+Once set, it should be possible to cycle through the various \VMD\ Spaceball 
+operational modes as described below.
+

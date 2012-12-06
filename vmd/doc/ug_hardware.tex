@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RCS INFORMATION:
+%
+%       $RCSfile: ug_hardware.tex,v $
+%       $Author: johns $        $Locker:  $                $State: Exp $
+%       $Revision: 1.1 $      $Date: 2009/07/31 06:06:51 $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DESCRIPTION:
+%   Basic hardware requirements, features, etc..               
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Hardware and Software Requirements}
+\label{chapter:requirements:ug}
+\index{hardware requirements}
+
+\section{Basic Hardware and Software Requirements}
+The basic hardware requirements for running VMD vary depending on 
+how it was compiled and how it will be used.  VMD has two primary
+modes of operation, the typical full-featured graphics-enabled mode, 
+and a purely text-based mode of operation suited for remote analysis
+on supercomputers, embedded use in other packages, and similar 
+batch-oriented analytical uses.  
+
+The full-featured graphics-enabled mode of VMD is the most demanding,
+and requires an OpenGL-capable graphics accelerator with up-to-date 
+drivers.  Some graphics chipsets or GPUs come with drivers that are
+below-spec and will not be able to run VMD with full graphics capability.
+These will either automatically, or as the result of 
+user-defined environment variables (e.g. VMDSIMPLEGRAPHICS), 
+use a reduced functionality graphics mode within \VMD.
+Since the choice of the GPU chipset or card has the biggest
+impact on the visualization capabilities and performance of VMD,
+this is the hardware component that is worth spending money on 
+if one's intended use of \VMD\ is primarily focused on visualization related
+tasks.  As an added bonus, recent GPUs are now also capable of accelerating
+some of the computationally demanding tasks within VMD, as will be discussed
+in more detail below.
+
+Following the choice of graphics accelerator, the amount of available
+system memory tends to have the next most significant impact on the
+performance and capability of VMD.  The more memory a machine has,
+the more frames can be loaded at once from large molecular
+dynamics trajectory files.  For batch-mode analysis tasks 
+that consist primarily of scripting, system memory is frequently the
+resource that limits feasability of many analysis tasks.
+
+\section{Multi-core CPUs and GPU Acceleration}
+VMD makes full use of multi-core processors and multiple GPUs for 
+acceleration of the most computationally demanding visualization 
+and analysis tasks.  Multi-core CPUs accelerate features including
+interactive MD, bond determination, ``within'' atom selections 
+and derivatives, radial distribution functions, and high quality
+renderings using the ``Tachyon'' and ``TachyonInternal'' ray tracing 
+features.  \VMD\ also supports GPU acceleration using CUDA, and takes 
+advantage of both multi-core CPUs and GPUs for acceleration of 
+electrostatics (i.e. ``volmap coulomb'', and ``volmap coulombmsm''), 
+implicit ligand sampling (i.e. ``volmap ils''), and 
+computation and rendering of molecular orbitals.
+
+

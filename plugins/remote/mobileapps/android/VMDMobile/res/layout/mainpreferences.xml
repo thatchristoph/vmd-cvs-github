@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <PreferenceCategory android:title="@string/prefsSettingsHeading">
+
+           <EditTextPreference
+                android:name="@string/nickLabel"
+                android:summary="@string/nickDescript"
+                android:defaultValue="Anonymous User"
+                android:maxLength="16"
+                android:title="@string/nickLabel"
+                android:key="nickEntry" />
+
+           <EditTextPreference
+                android:name   ="@string/rotScaleLabel"
+                android:title  ="@string/rotScaleLabel"
+                android:summary="@string/rotScaleDescript"
+                android:inputType="numberDecimal"
+                android:defaultValue="1.0"
+                android:key="rotScale" />
+
+           <EditTextPreference
+                android:name   ="@string/zoomScaleLabel"
+                android:title  ="@string/zoomScaleLabel"
+                android:summary="@string/zoomScaleDescript"
+                android:inputType="numberDecimal"
+                android:defaultValue="1.0"
+                android:key="zoomScale" />
+
+           <EditTextPreference
+                android:name   ="@string/tranScaleLabel"
+                android:title  ="@string/tranScaleLabel"
+                android:summary="@string/tranScaleDescript"
+                android:inputType="numberDecimal"
+                android:defaultValue="1.0"
+                android:key="tranScale" />
+
+           <CheckBoxPreference
+                android:title="@string/showBackgroundImageLabel"
+                android:summary="@string/showBackgroundImageDescript"
+                android:defaultValue="true"
+                android:key="showBackgroundImage" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/serverSettingsHeading">
+           <EditTextPreference
+                android:name="@string/ipLabel"
+                android:summary="@string/ipDescript"
+                android:defaultValue="set.machine.name.in.settings"
+                android:title="@string/ipLabel"
+                android:key="ipEntry" />
+           <EditTextPreference
+                android:name="@string/portLabel"
+                android:summary="@string/portDescript"
+                android:inputType="number"
+                android:defaultValue="3141"
+                android:title="@string/portLabel"
+                android:key="portEntry" />
+           <EditTextPreference
+                android:name="@string/listenportLabel"
+                android:summary="@string/listenportDescript"
+                android:inputType="number"
+                android:defaultValue="4141"
+                android:title="@string/listenportLabel"
+                android:key="listenportEntry" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/advancedSettingsHeading">
+           <CheckBoxPreference
+                android:title="@string/showDebugLabel"
+                android:summary="@string/showDebugDescript"
+                android:defaultValue="false"
+                android:key="showDebug" />
+
+           <ListPreference
+                android:title="@string/apiVersionLabel"
+                android:summary="@string/apiVersionDescript"
+                android:key="apiVersion"
+                android:defaultValue="Latest"
+                android:entries="@array/apiVersionKey"
+                android:entryValues="@array/apiVersionValues" />
+
+        </PreferenceCategory>
+
+
+
+</PreferenceScreen>

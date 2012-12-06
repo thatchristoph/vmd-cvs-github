@@ -1,0 +1,147 @@
+<!--#set var="TITLE" value="ParseFEP Plugin, Version 1.6"-->
+<!--#include virtual="/Research/vmd/include/header-vmd.shtml"-->
+
+<div style="text-align: justify;"><big style="color: rgb(153, 153, 153);"><span style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;"></span></big>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="10">
+  <tbody>
+    <tr>
+      <br>
+</span></big></td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 800px;">
+      <div style="text-align: justify;"><big style="color: rgb(153, 153, 153);"><span style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;"></span></big><span style="font-family: Helvetica,Arial,sans-serif;">ParseFEP consists of a set of tools for the analysis of free-energy perturbation (FEP) calculations carried out within NAMD. </span><br>
+      <span style="font-family: Helvetica,Arial,sans-serif;">
+      </span><span style="font-family: Helvetica,Arial,sans-serif;"></span><br>
+      <span style="font-family: Helvetica,Arial,sans-serif;">
+<span style="font-weight: bold;"><br>
+      <br>
+FEP estimator</span>. Based on the output file of an FEP calculation, i.e. the <span style="font-style: italic;">alchOutFile</span> file, ParseFEP computes the free-energy difference and provides an estimate of the statistical error.</span><br>
+      <span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;"><br>
+      <br>
+Bidirectional FEP calculations</span>.
+If the transformation is performed bidirectionally, the results of the
+forward and the backward simulations can be combined in the form of the
+simple-overlap sampling (SOS) estimator, or the Bennett
+acceptance-ratio (BAR) estimator of the free energy. For each approach,
+an estimator of the statistical error is supplied. </span><span style="font-family: Helvetica,Arial,sans-serif;">Because
+combination of the statistical data accrued in bidirectional FEP
+calculations reduces the variance, it is recommended to carry out the
+simulation in both the forward and the backward directions. The BAR
+estimator corresponds to the maximum-likelihood value of the free
+energy and is obtained self-consistently, using as an initial guess the
+result of the FEP calculation.</span><br>
+      <span style="font-family: Helvetica,Arial,sans-serif;">
+      </span><br style="font-weight: bold;">
+      <span style="font-family: Helvetica,Arial,sans-serif;">
+<span style="font-weight: bold;"><br>
+Pictorial representation</span>. For unidirectional FEP calculations, ParseFEP provides a graphical representation of the underlying probability distribution,<span style="font-family: Times New Roman,Times,serif;"><span style="font-style: italic;"></span></span> the Boltzmann weight<span style="font-family: Times New Roman,Times,serif;">, </span>and
+the product of the two. For bidirectional FEP calculations, ParseFEP
+displays the probability distributions characterizing the forward and
+the backward transformations. These distibutions are shown for all the
+windows, or strata, found in the </span><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-style: italic;">alchOutFile</span></span><span style="font-family: Helvetica,Arial,sans-serif;">
+file. It is, therefore, assumed that the output files for the FEP
+calculations performed in the two directions contain the same number of
+intermediate states.<br>
+      <br>
+      <span style="font-weight: bold;"><br>
+Comprehensive error analysis</span>. The error associated to
+free-energy estimates embraces contributions of different nature, a
+statistical component, namely the variance of the free-energy
+estimator, and a systematic component, that is, the bias arising from
+the finite length of the simulation. ParseFEP computes the variance for
+the three, i.e. FEP, SOS and BAR, free-energy estimators, thereby
+providing an assessment of the precision of the calculation. In
+addition, it estimates the bias as the relative inaccuracy of the
+free-energy calculation, based on the degree of overlap of the
+underlying probability distributions.<br>
+</span>
+      <span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;"><br>
+      <br>
+Monitoring the convergence</span>.
+ParseFEP plots the evolution of the free energy as a function of the
+number of molecular-dynamics steps. Only the information utilized
+towards the estimation of the free-energy difference, i.e. past <span style="font-style: italic;">alchEquilSteps</span>,
+is displayed. In the case of bidirectional FEP calculations, the
+evolution of the free energy is shown for both the forward and the
+backward transformations.</span><br>
+      <span style="font-family: Helvetica,Arial,sans-serif;"></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;"><br>
+      <br>
+Gram-Charlier interpolation</span>. The statistical information accumulated in the </span><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-style: italic;">alchOutFile</span>
+file can be employed to model the underlying probability distribution.
+The latter can be described in terms of a product of a Gaussian
+distribution by a series of Hermite polynomials, i.e. a Gram-Charlier
+expansion. Convergence of the Gram-Charlier expansion at a given order
+represents a relevant measure of how well-defined the probability distribution is. </span><br>
+      <span style="font-family: Helvetica,Arial,sans-serif;"></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;"><br>
+      <br>
+Enthalpies and entropies</span>. The
+perturbation formalism used to infer free-energy differences can be
+generalized for the determination of enthalpy and entropy differences.
+These estimates are inherently less accurate than those of the free
+energy, because they involve averages of the total energy and the
+computation of a difference of two, independently measured large
+numbers, subject to large fluctuations.</span><br>
+      <span style="font-family: Helvetica,Arial,sans-serif;">
+      </span><span style="font-family: Helvetica,Arial,sans-serif;"></span><br>
+      <br>
+      <br>
+      <br>
+<br>
+<span style="font-family: Helvetica,Arial,sans-serif;"><br>Note: On platforms running a Unix-like operating system, it is assumed that <span style="font-style: italic;">XMGrace</span> and <span style="font-style: italic;">ImageMagick</span> (display) are installed for visualization purposes. On Windows platforms, use is made of the <span style="font-style: italic;">Multiplot</span> plotting program.</span><br>
+      <span style="font-family: Helvetica,Arial,sans-serif;"></span></div>
+      <span style="font-family: Helvetica,Arial,sans-serif;">
+      </span><span style="font-family: Helvetica,Arial,sans-serif;"><br>
+      <br>
+      <br>
+      <br>
+<br>
+      <br>
+      </span>
+      <div style="text-align: justify;"><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;">How to cite ParseFEP</span></span><span style="font-family: Helvetica,Arial,sans-serif;">. Liu, P.; Dehez, F.; Cai, W.; Chipot, C. A toolkit for the analysis of free-energy perturbation calculations, <span style="font-style: italic;">J. Chem. Theor. Comput. </span><span style="font-weight: bold;">2012</span>, <span style="font-style: italic;">8</span>, 2606-2616.</span><br>
+      </div>
+</td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 213px;" alt="" src="gui.gif"><br>
+      <div style="text-align: left;">
+      <small><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;">Figure 1</span>. ParseFEP graphical user interface </span></small><br>
+      </div>
+<br>
+      <img style="width: 400px; height: 321px;" alt="" src="prob.gif"><br>
+      <div style="text-align: left;">
+      <small><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;">Figure 2</span>. Probability distributions for a bidirectional calculation.</span></small><br>
+      </div>
+<br>
+      <img style="width: 400px; height: 321px;" alt="" src="free.gif"><br>
+      <div style="text-align: right;">
+      <div style="text-align: left;">
+      <small><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;">Figure 3</span>. Evolution of the free energy in a bidirectional calculation.</span></small><br>
+      </div>
+
+      <small><span style="font-family: Helvetica,Arial,sans-serif;"></span></small></div>
+      <small><span style="font-family: Helvetica,Arial,sans-serif;"><br>
+      <img style="width: 400px; height: 190px;" alt="error" src="error.gif"><br>
+      </span></small>
+      <div style="text-align: left;">
+      <small><span style="font-family: Helvetica,Arial,sans-serif;"><span style="font-weight: bold;">Figure 4</span>. Error analysis based on overlapping distributions.</span></small><br>
+
+      </div>
+</td>
+    </tr>
+  </tbody>
+</table>
+<big style="color: rgb(153, 153, 153);"><span style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;"><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</span></big><span style="font-family: Helvetica,Arial,sans-serif;"><br>
+</span><br>
+<br>
+<span style="font-family: Helvetica,Arial,sans-serif;"></span><br>
+<span style="font-family: Helvetica,Arial,sans-serif;"></span></div>
+
+<!--#include virtual="/Research/vmd/include/footer-vmd.shtml"-->
+

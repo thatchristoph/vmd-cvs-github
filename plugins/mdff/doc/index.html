@@ -1,0 +1,107 @@
+<!--#set var="TITLE" value="MDFF Plugin, Version 0.2"-->
+<!--#include virtual="/Research/vmd/include/header-vmd.shtml"-->
+
+<p>The MDFF plugin provides commands for setting up and analyzing
+molecular dynamics flexible fitting simulations, i.e., simulations in
+which an atomic structure is flexibly fitted into a density map.</p>
+
+<h3>Getting started</h3>
+
+<p>For a description of the MDFF method, required software, related
+publications, related updates, etc., please see the <a
+  href="/Research/mdff">MDFF website</a>. The following reference provides
+a practical guide to MDFF:</p>
+
+<p>
+<a href="http://www.ks.uiuc.edu/Publications/Papers/abstract.cgi?tbcode=TRAB2009">Molecular Dynamics Flexible Fitting: A practical guide to combine cryo-electron microscopy and X-ray crystallography</a>. <br />
+Leonardo G. Trabuco*, Elizabeth Villa*, Eduard Schreiner, Christopher B. Harrison, and Klaus Schulten. <i>Methods</i>, <b>49</b>, 174-180, 2009.</p>
+
+<p><b>MDFF tutorial:</b> For tutorials related to the MDFF method, click <a
+  href="/Research/mdff/documentation.html">here.</a></p>
+
+<p><b>Getting help:</b>
+Any questions, bug reports, feature requests, suggestions or comments related to MDFF should be sent to the <a href="http://www.ks.uiuc.edu/Research/vmd/mailing_list/">VMD mailing list</a>.</p>
+
+<h3>Acknowledging MDFF in publications</h3>
+
+<p>Please cite the following reference in any work that applied MDFF:</p>
+
+<p>
+<a href="http://www.ks.uiuc.edu/Publications/Papers/abstract.cgi?tbcode=TRAB2008">Flexible fitting of atomic structures into electron microscopy maps using molecular dynamics</a>.<br />
+Leonardo G. Trabuco*, Elizabeth Villa*, Kakoli
+Mitra, Joachim Frank, and Klaus Schulten.
+<i>Structure</i>, <b>16</b>, 673-683, 2008.</p>
+
+<h3>MDFF developers</h3>
+
+<p>The MDFF plugin was written by <a href="/~ltrabuco">Leonardo Trabuco</a>
+and <a href="/~villa">Elizabeth Villa</a>.</p>
+
+<h3>MDFF commands</h3>
+
+<p>The current version of MDFF plugin provides text commands only. You first
+need to load the MDFF plugin by typing <tt>package require mdff</tt> in
+the VMD text console or the Tk Console. Typing <tt>mdff</tt> will print
+the available subcommands:</p>
+
+<p><tt>
+Usage:&nbsp;mdff&nbsp;&lt;command&gt;&nbsp;[args...]<br />Commands:<br />&nbsp;&nbsp;ccc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;calculates&nbsp;the&nbsp;cross-correlation&nbsp;coefficient<br />&nbsp;&nbsp;check&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;monitors&nbsp;the&nbsp;fitting&nbsp;via&nbsp;RMSD&nbsp;and&nbsp;CCC<br />&nbsp;&nbsp;constrain&nbsp;&nbsp;--&nbsp;creates&nbsp;a&nbsp;pdb&nbsp;file&nbsp;for&nbsp;restraining&nbsp;atoms<br />&nbsp;&nbsp;delete&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;deletes&nbsp;volume&nbsp;corresponding&nbsp;to&nbsp;atomic&nbsp;structure<br />&nbsp;&nbsp;edges&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;creates&nbsp;a&nbsp;map&nbsp;with&nbsp;smooth&nbsp;edges<br />&nbsp;&nbsp;fix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;creates&nbsp;a&nbsp;pdb&nbsp;file&nbsp;for&nbsp;fixing&nbsp;atoms<br />&nbsp;&nbsp;griddx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;creates&nbsp;a&nbsp;map&nbsp;for&nbsp;docking<br />&nbsp;&nbsp;gridpdb&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;creates&nbsp;a&nbsp;pdb&nbsp;file&nbsp;with&nbsp;atomic&nbsp;masses&nbsp;in&nbsp;the&nbsp;beta&nbsp;field<br />&nbsp;&nbsp;setup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;writes&nbsp;a&nbsp;NAMD&nbsp;configuration&nbsp;file&nbsp;for&nbsp;MDFF<br />&nbsp;&nbsp;sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;creates&nbsp;a&nbsp;simulated&nbsp;map&nbsp;from&nbsp;an&nbsp;atomic&nbsp;structure
+</tt></p>
+
+<p>Typing each command will print the corresponding usage information
+(e.g., type <tt>mdff sim</tt> to get the usage information of the
+<tt>sim</tt> subcommand.</p>
+
+<h4>mdff ccc</h4>
+<p><tt>
+  Usage:&nbsp;mdff&nbsp;ccc&nbsp;&lt;atom&nbsp;selection&gt;&nbsp;-i&nbsp;&lt;input&nbsp;map&gt;&nbsp;-res&nbsp;&lt;map&nbsp;resolution&nbsp;in&nbsp;Angstroms&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-spacing&nbsp;&lt;grid&nbsp;spacing&nbsp;in&nbsp;Angstroms&gt;&nbsp;(default:&nbsp;1.0)<br />&nbsp;&nbsp;-threshold&nbsp;&lt;x&nbsp;sigmas&gt;<br />&nbsp;&nbsp;-allframes&nbsp;(average&nbsp;over&nbsp;all&nbsp;frames)
+</tt></p>
+
+<h4>mdff check</h4>
+
+<p><tt>
+Usage:&nbsp;mdff&nbsp;check&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-mol&nbsp;&lt;molid&gt;&nbsp;(default:&nbsp;top)<br />&nbsp;&nbsp;-frames&nbsp;&lt;begin:end&gt;&nbsp;or&nbsp;&lt;begin:step:end&gt;&nbsp;or&nbsp;all&nbsp;or&nbsp;now&nbsp;(default:&nbsp;all)<br /><br />&nbsp;&nbsp;-rmsd&nbsp;--&nbsp;calculate&nbsp;the&nbsp;RMSD&nbsp;with&nbsp;respect&nbsp;to&nbsp;the&nbsp;refence&nbsp;structure<br />&nbsp;&nbsp;-rmsdseltext&nbsp;&lt;selection&nbsp;text&nbsp;for&nbsp;calculating&nbsp;the&nbsp;RMSD&gt;&nbsp;(default:&nbsp;backbone)<br />&nbsp;&nbsp;-refpdb&nbsp;&lt;pdb&nbsp;file&gt;&nbsp;--&nbsp;reference&nbsp;for&nbsp;RMSD&nbsp;calculation&nbsp;(default:&nbsp;frame&nbsp;0)<br />&nbsp;&nbsp;-rmsdfile&nbsp;&lt;file&nbsp;to&nbsp;write&nbsp;RMSD&gt;&nbsp;(default:&nbsp;none)<br /><br />&nbsp;&nbsp;-ccc&nbsp;--&nbsp;calculate&nbsp;cross&nbsp;correlation&nbsp;coefficient<br />&nbsp;&nbsp;-map&nbsp;&lt;input&nbsp;map&gt;&nbsp;(required&nbsp;by&nbsp;-ccc)<br />&nbsp;&nbsp;-res&nbsp;&lt;map&nbsp;resolution&nbsp;in&nbsp;Angstroms&gt;&nbsp;(required&nbsp;by&nbsp;-ccc)<br />&nbsp;&nbsp;-spacing&nbsp;&lt;grid&nbsp;spacing&nbsp;in&nbsp;Angstroms&gt;&nbsp;(default:&nbsp;1.0)<br />&nbsp;&nbsp;-cccseltext&nbsp;&lt;selection&nbsp;text&nbsp;for&nbsp;calculating&nbsp;the&nbsp;cross&nbsp;correlation&nbsp;(default:&nbsp;protein&nbsp;or&nbsp;nucleic)<br />&nbsp;&nbsp;-cccfile&nbsp;&nbsp;&lt;file&nbsp;to&nbsp;write&nbsp;cross&nbsp;correlation&gt;&nbsp;(default:&nbsp;none)<br />&nbsp;&nbsp;-threshold&nbsp;&lt;x&nbsp;sigmas&gt;
+</tt></p>
+
+<h4>mdff constrain</h4>
+<p><tt>
+  Usage:&nbsp;mdff&nbsp;constrain&nbsp;&lt;atomselection&gt;&nbsp;-o&nbsp;&lt;pdb&nbsp;file&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-col&nbsp;&lt;column&gt;&nbsp;(default:&nbsp;B)<br />&nbsp;&nbsp;-k&nbsp;&lt;force&nbsp;constant&nbsp;in&nbsp;kcal/mol/A^2&gt;&nbsp;(default:&nbsp;10.0)
+</tt></p>
+
+<h4>mdff delete</h4>
+<p><tt>
+Usage:&nbsp;mdff&nbsp;delete&nbsp;&lt;atom&nbsp;selection&gt;&nbsp;-i&nbsp;&lt;input&nbsp;map&gt;&nbsp;-o&nbsp;&lt;output&nbsp;dx&nbsp;map&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-res&nbsp;&lt;target&nbsp;resolution&nbsp;in&nbsp;Angstroms&gt;&nbsp;(default:&nbsp;10.0)<br />&nbsp;&nbsp;-spacing&nbsp;&lt;grid&nbsp;spacing&nbsp;for&nbsp;"mask"&nbsp;map&nbsp;in&nbsp;Angstroms&gt;&nbsp;(default:&nbsp;1.0)<br />&nbsp;&nbsp;-allframes&nbsp;--&nbsp;average&nbsp;over&nbsp;all&nbsp;frames
+</tt></p>
+
+<h4>mdff edges</h4>
+<p><tt>
+Usage:&nbsp;mdff&nbsp;edge&nbsp;-i&nbsp;&lt;input&nbsp;map&gt;&nbsp;-o&nbsp;&lt;output&nbsp;dx&nbsp;map&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-kernel&nbsp;&lt;Gaussian&nbsp;kernel&gt;&nbsp;(default:&nbsp;3.0)
+</tt></p>
+
+<h4>mdff fix</h4>
+<p><tt>
+Usage:&nbsp;mdff&nbsp;fix&nbsp;&lt;atomselection&gt;&nbsp;-o&nbsp;&lt;pdb&nbsp;file&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-col&nbsp;&lt;column&gt;&nbsp;(default:&nbsp;O)
+</tt></p>
+
+<h4>mdff griddx</h4>
+<p><tt>
+Usage:&nbsp;mdff&nbsp;griddx&nbsp;-i&nbsp;&lt;input&nbsp;map&gt;&nbsp;-o&nbsp;&lt;output&nbsp;dx&nbsp;map&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-threshold&nbsp;&lt;value&gt;&nbsp;(default:&nbsp;0)
+</tt></p>
+
+<h4>mdff gridpdb</h4>
+<p><tt>
+Usage:&nbsp;mdff&nbsp;gridpdb&nbsp;-psf&nbsp;&lt;input&nbsp;psf&gt;&nbsp;-pdb&nbsp;&lt;input&nbsp;pdb&gt;&nbsp;-o&nbsp;&lt;output&nbsp;pdb&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-seltext&nbsp;&nbsp;&nbsp;--&nbsp;atom&nbsp;selection&nbsp;text&nbsp;&nbsp;(default:&nbsp;noh&nbsp;and&nbsp;(protein&nbsp;or&nbsp;nucleic))
+</tt></p>
+
+<h4>mdff setup</h4>
+<p><tt>
+Usage:&nbsp;mdff&nbsp;setup&nbsp;-o&nbsp;&lt;output&nbsp;prefix&gt;&nbsp;-psf&nbsp;&lt;psf&nbsp;file&gt;&nbsp;-pdb&nbsp;&lt;pdb&nbsp;file&gt;&nbsp;-griddx&nbsp;&lt;griddx&nbsp;file&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-gridpdb&nbsp;&nbsp;--&nbsp;pdb&nbsp;file&nbsp;for&nbsp;docking&nbsp;(default:&nbsp;-pdb)<br />&nbsp;&nbsp;-diel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;dielectric&nbsp;constant&nbsp;(default:&nbsp;80;&nbsp;1&nbsp;with&nbsp;-pbc)<br />&nbsp;&nbsp;-temp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;temperature&nbsp;in&nbsp;Kelvin&nbsp;(default:&nbsp;300)<br />&nbsp;&nbsp;-ftemp&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;final&nbsp;temperature&nbsp;(default:&nbsp;300)<br />&nbsp;&nbsp;-gscale&nbsp;&nbsp;&nbsp;--&nbsp;scaling&nbsp;factor&nbsp;for&nbsp;the&nbsp;grid&nbsp;(default:&nbsp;0.3)<br />&nbsp;&nbsp;-extrab&nbsp;&nbsp;&nbsp;--&nbsp;extrabonds&nbsp;file&nbsp;(default:&nbsp;none)<br />&nbsp;&nbsp;-conspdb&nbsp;&nbsp;--&nbsp;pdb&nbsp;file&nbsp;with&nbsp;constrained&nbsp;atoms&nbsp;(default:&nbsp;none)<br />&nbsp;&nbsp;-conscol&nbsp;&nbsp;--&nbsp;force&nbsp;constant&nbsp;column&nbsp;in&nbsp;conspdb&nbsp;(default:&nbsp;beta)<br />&nbsp;&nbsp;-fixpdb&nbsp;&nbsp;&nbsp;--&nbsp;pdb&nbsp;file&nbsp;with&nbsp;fixed&nbsp;atoms&nbsp;(default:&nbsp;none)<br />&nbsp;&nbsp;-fixcol&nbsp;&nbsp;&nbsp;--&nbsp;column&nbsp;in&nbsp;fixpdb&nbsp;(default:&nbsp;occupancy)<br />&nbsp;&nbsp;-scal14&nbsp;&nbsp;&nbsp;--&nbsp;1-4&nbsp;scaling&nbsp;(default:&nbsp;1.0)<br />&nbsp;&nbsp;-step&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;docking&nbsp;protocol&nbsp;step&nbsp;(default:&nbsp;1)<br />&nbsp;&nbsp;-parfiles&nbsp;--&nbsp;parameter&nbsp;file&nbsp;list<br />&nbsp;&nbsp;-minsteps&nbsp;--&nbsp;number&nbsp;of&nbsp;minimization&nbsp;steps&nbsp;(default&nbsp;200)<br />&nbsp;&nbsp;-numsteps&nbsp;--&nbsp;number&nbsp;of&nbsp;time&nbsp;steps&nbsp;to&nbsp;run&nbsp;(default:&nbsp;500000)<br />&nbsp;&nbsp;-margin&nbsp;&nbsp;&nbsp;--&nbsp;extra&nbsp;length&nbsp;in&nbsp;patch&nbsp;dimension&nbsp;during&nbsp;simulation&nbsp;(default:&nbsp;0)<br />&nbsp;&nbsp;-pbc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;use&nbsp;periodic&nbsp;boundary&nbsp;conditions&nbsp;(for&nbsp;explicit&nbsp;solvent)
+</tt></p>
+
+<h4>mdff sim</h4>
+<p><tt>
+Usage:&nbsp;mdff&nbsp;sim&nbsp;&lt;atomselection&gt;&nbsp;-o&nbsp;&lt;output&nbsp;map&gt;&nbsp;?options?<br />Options:<br />&nbsp;&nbsp;-res&nbsp;&lt;target&nbsp;resolution&nbsp;in&nbsp;Angstroms&gt;&nbsp;(default:&nbsp;10.0)<br />&nbsp;&nbsp;-spacing&nbsp;&lt;grid&nbsp;spacing&nbsp;in&nbsp;Angstroms&gt;&nbsp;(default:&nbsp;1.0)<br />&nbsp;&nbsp;-allframes&nbsp;(average&nbsp;over&nbsp;all&nbsp;frames)
+</tt></p>
+
+<!--#include virtual="/Research/vmd/include/footer-vmd.shtml"-->
+

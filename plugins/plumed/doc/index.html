@@ -1,0 +1,170 @@
+<!--#set var="TITLE" value="PLUMED Plugin, Version 0.9"-->
+<!--#include virtual="/Research/vmd/include/header-vmd.shtml"-->
+
+Important: please check the current version of software and.
+documentation at its home-page:
+<a href=http://www.multiscalelab.org/utilities/PlumedCVTool>http://www.multiscalelab.org/utilities/PlumedCVTool</a>
+
+
+<h2>A general collective variable analysis tool (PLUMED GUI)</h2>
+<p>
+The PLUMED collective variable analysis tool is a VMD plugin that provides
+access to the extensive set of collective variables (CV) defined in the
+[22]PLUMED software. It allows you to:
+<ul>
+<li>analyze the currently loaded trajectory by evaluating and plotting
+    arbitrary CVs
+<li>use VMD's atom selection keywords to define atom groups and ready-made
+    templates for common CVs
+<li>export the CV definition file for use in MD simulations
+<li>prepare reference files for RMSD, path-variable, native contacts, etc.
+<li>analyze DCD files in batches
+</ul>
+
+<p>
+Please check that you have the latest version installed.
+
+<h3>Usage</h3>
+   The usage of the plugin is straightforward.
+
+<p>
+<ol>
+<li>From VMD's main window, select "Extensions-&gt;Analysis-&gt;Collective
+    variable analysis (PLUMED)"
+<li>Edit the CV definition file, defining one or more CVs
+<li>Enter the number of CVs defined in the corresponding box
+<li>Click "Plot". This will open a plot window with the selected CVs.
+</ol>
+
+<p>
+CV definition files can be opened, edited and saved as usual. Save and
+Save as... save the currently open file varbatim, while the Export..
+function performs the atom selection replacements (see below), thus
+creating a META_INP file that can be used directly in simulations. The
+Edit menu provides the usual text-editing options.
+
+<p>
+Elements in the [23]Templates menu provides shortcuts for most CVs
+supported by PLUMED. Please refer to PLUMED's [24]user's guide for the
+full syntax.
+
+<p>
+Square brackets can be used to conveniently define atom groups (Ctrl-G).
+During evaluation, atom selection keywords in square brackets are replaced
+with a list of the corresponding serial numbers for the top molecule.
+
+<p>
+When Plot is clicked, the currently loaded trajectory is exported to a
+temporary directory (shown in the console), and the driver utility is
+invoked. If there are no errors, a plot will show the CVs evaluated on the
+frames of the current trajectory.
+
+<h3>Reference structures for RMSD and path variables</h3>
+
+   The File-&gt;Prepare[25] reference structure... dialog can be used to prepare
+   pseudo-PDB files that can be used as reference structures for RMSD,
+   path-variables, etc. Two VMD atom selections are required to define the
+   set of atoms that will be used for alignment (alignment set) and for the
+   distance measurement (displacement set), respectively. The currently
+   selected frame of the top molecule is used to create a reference file;
+   numbering can be altered to conform to another molecule. The file format
+   is specified in the 'Path collective variables' section of the PLUMED
+   manual. Note: After generating the structures, remember to set the top
+   molecule to the one you want to analyze.
+
+<h3>Native contacts</h3>
+
+   The Edit-&gt;Native contacts CV inserts a native-contacts CV. The currently
+   selected frame of the top molecule is taken as the native state. Atom
+   numbers are adapted to fit the structure indicated in the target molecule
+   field. If selection 2 is given, only intermolecular contacts (between
+   selection 1 and 2) are counted. Otherwise, contacts internal in selection
+   1 are considered. The Distance cutoff selects the radius to consider
+   contacts in the native state. If only one selection is given, contacts can
+   be filtered with the D resid option (see description in [26]RMSD
+   trajectory tool enhanced with native contacts). Group name specifies the
+   label for two atom lists (that will be placed at the top of the plumed
+   file). Note: After generating the CV lines, remember to set the top
+   molecule to the one you want to analyze.
+
+<h3>Batch analysis</h3>
+
+   Once a script is tested, the menu option File-&gt;Batch analysis...  allows you
+   to apply it to all of the DCD files in a chosen directory. The files are
+   processed according to the current settings, and need to match the top
+   molecule. If the Combine option is unselected, a .dcd.colvar file will be
+   created along with each .dcd trajectory. If the Combine option is
+   selected, the metrics for the various trajectories will be joined in a
+   single metric.dat file. Lines of the file contains the file name, followed
+   by the usual COLVAR columns (without header). Note: existing .colvar or
+   metric.dat files will be overwritten without warning. You can set Number
+   of processes to run multiple processes concurrently; it is advantageous to
+   spawn between 1 and 2 times the number of CPU cores you have.
+
+<h3>Notes</h3>
+
+   The number of CVs defined has to be entered manually. In case of errors,
+   inspect the console; it will provide diagnostics and the location of the
+   temporary files. Hills deposition should be disabled. Periodic boundary
+   conditions should to be set especially when dealing with non-wrapped
+   solvent or with MD engines which "break" molecules by wrapping them. The
+   Electrostatic energy and Dipole CVs require charges to be defined in the
+   currently loaded molecule, so AMBER or CHARMM topology file have to be
+   loaded beforehand. Some options have not been included in the templates.
+
+   Note that PLUMED's 1.2.0 parser for alignment structures is somewhat
+   broken; workarounds are used, but feel free to apply the following patch
+   to fix it permanently [32]patch-pdbparser.
+
+   The plugin is current for PLUMED version 1.2.0.
+
+<h3>Acknowledgments</h3>
+<p>
+(c) Universitat Pompeu Fabra 2010.
+<p>
+Author and feedback: Toni Giorgino (at gmail)
+<p>
+Work partially supported by the VPH-NoE.
+<p>
+   [33]http://img191.imageshack.us/img191/496/vphlogo.png
+<p>
+   Copyright 2008-2009. All rights reserved.
+
+<h3>References</h3>
+
+<pre>
+   Visible links
+   1. http://www.multiscalelab.org/Welcome
+   2. http://www.multiscalelab.org/utilities/PlumedCVTool?action=raw
+   3. http://www.multiscalelab.org/utilities/PlumedCVTool?action=print
+   4. http://www.multiscalelab.org/utilities/PlumedCVTool?action=AttachFile&do=view&target=patch-pdbparser
+   5. http://www.multiscalelab.org/utilities/PlumedCVTool?action=AttachFile&do=view&target=vmdplumed.tcl
+   6. http://www.multiscalelab.org/FindPage
+   7. http://www.multiscalelab.org/TitleIndex
+   8. http://www.multiscalelab.org/WordIndex
+   9. http://www.multiscalelab.org/HelpOnFormatting
+  13. http://www.multiscalelab.org/Welcome
+  14. http://www.multiscalelab.org/Research
+  15. http://www.multiscalelab.org/Software
+  16. http://www.multiscalelab.org/People
+  17. http://www.multiscalelab.org/Publications
+  18. http://www.multiscalelab.org/Contact
+  19. http://www.multiscalelab.org/utilities/PlumedCVTool
+  20. http://www.multiscalelab.org/utilities/PlumedCVTool?action=login
+  21. http://www.multiscalelab.org/utilities/PlumedCVTool
+  22. http://merlino.mi.infn.it/~plumed/PLUMED/Home.html
+  23. http://img204.imageshack.us/i/29948613.png/
+  24. http://merlino.mi.infn.it/~plumed/PLUMED/Manual_and_Changelog_files/manual_1-2.pdf
+  25. http://img835.imageshack.us/i/screenshotpreparerefere.png/
+  26. http://www.multiscalelab.org/utilities/RMSDTTNC
+  28. http://img836.imageshack.us/i/screenshotmultiplot.png/
+  29. http://img204.imageshack.us/i/29948613.png/
+  30. http://img835.imageshack.us/i/screenshotpreparerefere.png/
+  31. attachment:vmdplumed.tcl
+	http://www.multiscalelab.org/utilities/PlumedCVTool?action=AttachFile&do=view&target=vmdplumed.tcl
+  32. attachment:patch-pdbparser
+	http://www.multiscalelab.org/utilities/PlumedCVTool?action=AttachFile&do=view&target=patch-pdbparser
+</pre>
+
+<!--#include virtual="/Research/vmd/include/footer-vmd.shtml"-->
+

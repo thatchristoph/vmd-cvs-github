@@ -1,0 +1,52 @@
+[Language]
+LanguageSupport0=0009
+
+[OperatingSystem]
+OSSupport=0000000000010010
+
+[Data]
+CurrentMedia=New Media
+CurrentComponentDef=Default.cdf
+ProductName=VMD
+set_mifserial=
+DevEnvironment=Microsoft Visual C++ 6
+AppExe=C:\TEMP\vmd\winvmd.exe
+set_dlldebug=No
+EmailAddresss=
+Instructions=Instructions.txt
+set_testmode=No
+set_mif=No
+SummaryText=
+Department=
+HomeURL=
+Author=
+Type=Internet Application
+InstallRoot=S:\vmd\msvc\inst\VMD
+Version=1.4
+InstallationGUID=87a81e4b-0d3b-11d3-b096-00e0291cdd4b
+set_level=Level 3
+CurrentFileGroupDef=Default.fdf
+Notes=Notes.txt
+set_maxerr=50
+set_args=
+set_miffile=Status.mif
+set_dllcmdline=
+Copyright=
+set_warnaserr=No
+CurrentPlatform=
+Category=
+set_preproc=
+CurrentLanguage=English
+CompanyName=University of Illinois
+Description=Description.txt
+set_maxwarn=50
+set_crc=Yes
+set_compileb4build=Yes
+
+[MediaInfo]
+mediadata0=New Media/Media\New Media
+
+[General]
+Type=INSTALLMAIN
+Version=1.10.000
+

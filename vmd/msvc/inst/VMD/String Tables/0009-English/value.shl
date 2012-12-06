@@ -1,0 +1,24 @@
+[Data]
+TITLE_MAIN=VMD
+COMPANY_NAME=University of Illinois
+ERROR_COMPONENT=Component:
+COMPANY_NAME16=Company
+PRODUCT_VERSION=1.8.7
+ERROR_MOVEDATA=An error occurred during the move data process: %d
+ERROR_FILEGROUP=File Group:
+UNINST_KEY=VMD
+TITLE_CAPTIONBAR=VMD Setup
+PRODUCT_NAME16=Product
+ERROR_VGARESOLUTION=This program requires VGA or better resolution.
+ERROR_FILE=File:
+FOLDER_NAME=VMD
+UNINST_DISPLAY_NAME=VMD
+PRODUCT_KEY=winvmd.exe
+PRODUCT_NAME=VMD
+ERROR_UNINSTSETUP=unInstaller setup failed to initialize.  You may not be able to uninstall this product.
+
+[General]
+Language=0009
+Type=STRINGTABLESPECIFIC
+Version=1.00.000
+
